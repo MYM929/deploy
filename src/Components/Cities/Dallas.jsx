@@ -18,9 +18,8 @@ import s15 from '../../assets/TestImage/IMG_20230602_130008.jpg'
 import s16 from '../../assets/TestImage/IMG_20230602_130219.jpg'
 
 const Dallas = () => {
-
-const images = [
-    { original: s1, thumbnail: s1},
+  const images = [
+    { original: s1, thumbnail: s1 },
     { original: s2, thumbnail: s2 },
     { original: s3, thumbnail: s3 },
     { original: s4, thumbnail: s4 },
@@ -36,22 +35,21 @@ const images = [
     // { original: s14, thumbnail: s14 },
     // { original: s15, thumbnail: s15 },
     // { original: s16, thumbnail: s16 }
-    ];  
+  ];  
 
   return (
     <>
-        <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-400">
-            <h1 className="text-4xl font-bold mb-8">Welcome to my space</h1>
-            <div className="w-1/3">
-                <ImageGallery 
-                items={images} 
-                loading="lazy" 
-                thumbnailLoading="lazy"
-                thumbnailPosition="right"
-                originalHeight="10"
-                />
-            </div>
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-400">
+        <h1 className="h-[10vh] flex items-center justify-center text-4xl font-bold mb-8 bg-blue-400">Welcome to my space</h1>
+        <div className="h-[50vh] relative flex justify-center bg-red-200 w-full">
+          <ImageGallery
+            items={images} 
+            loading="lazy" 
+            thumbnailLoading="lazy"
+            thumbnailPosition="right"
+          />
         </div>
+      </div>
     </>
   )
 }

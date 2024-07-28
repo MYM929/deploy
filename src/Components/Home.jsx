@@ -67,10 +67,10 @@ const Home = () => {
 
       <div className="h-1/10 flex flex-col items-center justify-center bg-white">
         <div className="flex space-x-4">
-          <button onClick={() => navigate('/city/dallas')} className="m-2 p-2 bg-blue-500 text-white rounded">
+          <button onClick={() => navigate('/deploy/city/dallas')} className="m-2 p-2 bg-blue-500 text-white rounded">
             To Dallas
           </button>
-          <button onClick={() => navigate('/city/boston')} className="m-2 p-2 bg-blue-500 text-white rounded">
+          <button onClick={() => navigate('/deploy/city/boston')} className="m-2 p-2 bg-blue-500 text-white rounded">
             To Boston
           </button>
         </div>
@@ -89,7 +89,7 @@ const Home = () => {
               className="w-auto h-auto object-contain" 
             />
             <button 
-              onClick={() => navigate('/city/dallas')} 
+              onClick={() => navigate('/deploy/city/cityTemplate')} 
               className="absolute bg-red-500 text-white flex items-center justify-center"
               style={{ 
                 top: '70%', 
