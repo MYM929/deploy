@@ -90,7 +90,7 @@ const CityTemplate = () => {
           className="w-[5%] h-[65vh] bg-red-400 flex items-center justify-center cursor-pointer"
           onClick={handlePreviousImage}
         >
-          <h1>Previous</h1>
+          <h1>Prev</h1>
         </div>
         <div className="h-[65vh] w-full flex items-center justify-center relative" ref={imageContainerRef}>
           <img src={images[currentIndex]} alt="" className="h-full w-auto object-contain" />
@@ -100,7 +100,7 @@ const CityTemplate = () => {
                 onClick={handlePreviousImage}
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded"
               >
-                Previous
+                Prev
               </button>
               <button
                 onClick={handleNextImage}
