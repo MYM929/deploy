@@ -105,7 +105,7 @@ const CityTemplate = () => {
       </div>
 
       {/* Middle */}
-      <div className="flex flex-row">
+      <div className="flex flex-row flex-grow">
         <div 
           className="w-[5%] h-[65vh] bg-red-400 flex items-center justify-center cursor-pointer"
           onClick={handlePreviousImage}
@@ -162,11 +162,11 @@ const CityTemplate = () => {
               ref={el => thumbnailsRef.current[index] = el}
               src={image}
               alt={`thumbnail-${index}`}
-              className={`h-full w-auto object-contain cursor-pointer ${currentIndex === index ? 'border-4 border-blue-500' : ''}`}
+              className={`h-full w-auto object-contain cursor-pointer hover:border-4 hover:border-blue-500 ${currentIndex === index ? 'border-4 border-blue-500' : ''}`}
               onClick={() => {
                 setCurrentIndex(index);
                 thumbnailsRef.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
-              }}c
+              }}
             />
           ))}
         </div>
