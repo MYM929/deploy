@@ -166,7 +166,7 @@ const CityTemplate = () => {
               onClick={() => {
                 setCurrentIndex(index);
                 thumbnailsRef.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
-              }}
+              }}c
             />
           ))}
         </div>
