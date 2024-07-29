@@ -77,13 +77,16 @@ const CityTemplate = () => {
     isDragging.current = true;
     startX.current = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
     currentX.current = startX.current;
+    setTranslateX(0); // Ensure transition is reset
   };
 
   const handleDragMove = (e) => {
     if (!isDragging.current) return;
     currentX.current = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
     const deltaX = currentX.current - startX.current;
-    setTranslateX(deltaX);
+    requestAnimationFrame(() => {
+      setTranslateX(deltaX);
+    });
   };
 
   const handleDragEnd = () => {
@@ -158,7 +161,12 @@ const CityTemplate = () => {
           <h1>Prev</h1>
         </div>
         <div className="h-[65vh] w-full flex items-center justify-center relative" ref={imageContainerRef}>
-          <img src={images[currentIndex]} alt="" className="h-full w-auto object-contain" style={{ transform: `translateX(${translateX}px)` }} />
+          <img 
+            src={images[currentIndex]} 
+            alt="" 
+            className="h-full w-auto object-contain transition-transform duration-200 ease-out" 
+            style={{ transform: `translateX(${translateX}px)` }} 
+          />
           {isFullscreen && (
             <>
               <button
