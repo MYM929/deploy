@@ -23,13 +23,28 @@ const CityTemplate = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const imageContainerRef = useRef(null);
+  const thumbnailsRef = useRef([]);
+  const startX = useRef(0);
+  const currentX = useRef(0);
+  const isDragging = useRef(false);
+  const [translateX, setTranslateX] = useState(0);
 
   const handlePreviousImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + images.length) % images.length;
+      thumbnailsRef.current[newIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      return newIndex;
+    });
+    setTranslateX(0);
   };
 
   const handleNextImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % images.length;
+      thumbnailsRef.current[newIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      return newIndex;
+    });
+    setTranslateX(0);
   };
 
   const handleFullscreen = () => {
@@ -57,6 +72,56 @@ const CityTemplate = () => {
       document.msExitFullscreen();
     }
   };
+
+  const handleDragStart = (e) => {
+    isDragging.current = true;
+    startX.current = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    currentX.current = startX.current;
+  };
+
+  const handleDragMove = (e) => {
+    if (!isDragging.current) return;
+    currentX.current = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    const deltaX = currentX.current - startX.current;
+    setTranslateX(deltaX);
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging.current) return;
+    const deltaX = currentX.current - startX.current;
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        handlePreviousImage();
+      } else {
+        handleNextImage();
+      }
+    }
+    isDragging.current = false;
+    setTranslateX(0);
+  };
+
+  useEffect(() => {
+    const container = imageContainerRef.current;
+    container.addEventListener('mousedown', handleDragStart);
+    container.addEventListener('mousemove', handleDragMove);
+    container.addEventListener('mouseup', handleDragEnd);
+    container.addEventListener('mouseleave', handleDragEnd);
+    container.addEventListener('touchstart', handleDragStart);
+    container.addEventListener('touchmove', handleDragMove);
+    container.addEventListener('touchend', handleDragEnd);
+    container.addEventListener('touchcancel', handleDragEnd);
+
+    return () => {
+      container.removeEventListener('mousedown', handleDragStart);
+      container.removeEventListener('mousemove', handleDragMove);
+      container.removeEventListener('mouseup', handleDragEnd);
+      container.removeEventListener('mouseleave', handleDragEnd);
+      container.removeEventListener('touchstart', handleDragStart);
+      container.removeEventListener('touchmove', handleDragMove);
+      container.removeEventListener('touchend', handleDragEnd);
+      container.removeEventListener('touchcancel', handleDragEnd);
+    };
+  }, []);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -93,7 +158,7 @@ const CityTemplate = () => {
           <h1>Prev</h1>
         </div>
         <div className="h-[65vh] w-full flex items-center justify-center relative" ref={imageContainerRef}>
-          <img src={images[currentIndex]} alt="" className="h-full w-auto object-contain" />
+          <img src={images[currentIndex]} alt="" className="h-full w-auto object-contain" style={{ transform: `translateX(${translateX}px)` }} />
           {isFullscreen && (
             <>
               <button
@@ -135,10 +200,14 @@ const CityTemplate = () => {
           {images.map((image, index) => (
             <img
               key={index}
+              ref={el => thumbnailsRef.current[index] = el}
               src={image}
               alt={`thumbnail-${index}`}
               className={`h-full w-auto object-contain cursor-pointer ${currentIndex === index ? 'border-4 border-blue-500' : ''}`}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => {
+                setCurrentIndex(index);
+                thumbnailsRef.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+              }}
             />
           ))}
         </div>
