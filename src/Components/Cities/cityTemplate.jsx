@@ -128,7 +128,7 @@ const CityTemplate = () => {
       </div>
 
       {/* Middle */}
-      <div className="flex flex-row flex-grow h-[45svh]">
+      <div className="flex flex-row flex-grow h-[65svh]">
         <div 
           className="w-[5%] bg-red-400 flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(-1)}
