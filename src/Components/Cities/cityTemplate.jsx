@@ -128,14 +128,14 @@ const CityTemplate = () => {
       </div>
 
       {/* Middle */}
-      <div className="flex flex-row flex-grow">
+      <div className="flex flex-row flex-grow h-[65svh]">
         <div 
-          className="w-[5%] h-[65svh] bg-red-400 flex items-center justify-center cursor-pointer"
+          className="w-[5%] bg-red-400 flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(-1)}
         >
           <h1>Prev</h1>
         </div>
-        <div className="relative h-[65svh] w-full flex items-center justify-center" ref={imageContainerRef}>
+        <div className="relative w-full flex items-center justify-center" ref={imageContainerRef}>
             <img
                 src={images[currentIndex]}
                 alt=""
@@ -171,7 +171,7 @@ const CityTemplate = () => {
           )}
         </div>
         <div 
-          className="w-[5%] h-[65svh] bg-blue-400 flex items-center justify-center cursor-pointer"
+          className="w-[5%] bg-blue-400 flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(1)}
         >
           <h1>Next</h1>
@@ -179,7 +179,7 @@ const CityTemplate = () => {
       </div>
 
       {/* Bottom */}
-      <div className="flex flex-col">
+      <div className="flex flex-col h-[25svh]">
         <div className="h-[5svh] bg-green-400 flex items-center justify-between px-4">
           <h1>hello1</h1>
           <button onClick={handleFullscreen} className="bg-gray-800 text-white px-2 py-1 rounded">Fullscreen</button>
