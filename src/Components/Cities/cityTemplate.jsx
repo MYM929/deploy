@@ -120,22 +120,22 @@ const CityTemplate = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ height: '100dvh' }}>
 
       {/* Heading */}
-      <div className="flex items-center justify-center h-[10vh] bg-blue-300">
+      <div className="flex items-center justify-center h-[10svh] bg-blue-300">
         <h1 className="text-4xl font-bold">Welcome to Dallas</h1>
       </div>
 
       {/* Middle */}
       <div className="flex flex-row flex-grow">
         <div 
-          className="w-[5%] h-[65vh] bg-red-400 flex items-center justify-center cursor-pointer"
+          className="w-[5%] h-[65svh] bg-red-400 flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(-1)}
         >
           <h1>Prev</h1>
         </div>
-        <div className="relative h-[65vh] w-full flex items-center justify-center" ref={imageContainerRef}>
+        <div className="relative h-[65svh] w-full flex items-center justify-center" ref={imageContainerRef}>
             <img
                 src={images[currentIndex]}
                 alt=""
@@ -171,7 +171,7 @@ const CityTemplate = () => {
           )}
         </div>
         <div 
-          className="w-[5%] h-[65vh] bg-blue-400 flex items-center justify-center cursor-pointer"
+          className="w-[5%] h-[65svh] bg-blue-400 flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(1)}
         >
           <h1>Next</h1>
@@ -180,11 +180,11 @@ const CityTemplate = () => {
 
       {/* Bottom */}
       <div className="flex flex-col">
-        <div className="h-[5vh] bg-green-400 flex items-center justify-between px-4">
+        <div className="h-[5svh] bg-green-400 flex items-center justify-between px-4">
           <h1>hello1</h1>
           <button onClick={handleFullscreen} className="bg-gray-800 text-white px-2 py-1 rounded">Fullscreen</button>
         </div>
-        <div className="h-[20vh] bg-pink-400 flex items-center overflow-x-auto space-x-2 px-2">
+        <div className="h-[20svh] bg-pink-400 flex items-center overflow-x-auto space-x-2 px-2">
           {images.map((image, index) => (
             <img
               key={index}
