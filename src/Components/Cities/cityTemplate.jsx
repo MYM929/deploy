@@ -16,41 +16,68 @@ import s14 from "../../assets/TestImage/IMG_20230602_125729.jpg";
 import s15 from "../../assets/TestImage/IMG_20230602_130008.jpg";
 import s16 from "../../assets/TestImage/IMG_20230602_130219.jpg";
 
+
 const CityTemplate = () => {
   const images = [
     s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const imageContainerRef = useRef(null);
   const thumbnailsRef = useRef([]);
 
-  const handlePreviousImage = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => {
-        const newIndex = (prevIndex - 1 + images.length) % images.length;
-        thumbnailsRef.current[newIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
-        setIsAnimating(false);
-        return newIndex;
-      });
-    }, 500);
+  const [fadeOut, setFateOut] = useState(false);
+  const [fadeIn, setFateIn] = useState(false);
+
+
+  const handleFateOut = () => {
+    return new Promise((resolve) => {
+      setFateOut(true);
+      const fadeOutTime = setTimeout(() => {
+        setFateOut(false);
+        resolve();
+      }, 500); // Updated to 500ms
+  
+      return () => {
+        clearTimeout(fadeOutTime);
+      };
+    });
+  };
+  
+  useEffect(() => {
+    setFateIn(true);
+    const fadeTime = setTimeout(() => {
+      setFateIn(false);
+    }, 500); // Updated to 500ms
+  
+    return () => {
+      clearTimeout(fadeTime);
+    };
+  }, [currentIndex]);
+  
+  
+
+  const handlePreviousImage = async () => {
+    await handleFateOut();
+  
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + images.length) % images.length;
+      thumbnailsRef.current[newIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      return newIndex;
+    });
   };
 
-  const handleNextImage = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % images.length;
-        thumbnailsRef.current[newIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
-        setIsAnimating(false);
-        return newIndex;
-      });
-    }, 500);
+  const handleNextImage = async () => {
+    await handleFateOut();
+  
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1 + images.length) % images.length;
+      thumbnailsRef.current[newIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      return newIndex;
+    });
   };
+  
+
 
   const handleFullscreen = () => {
     if (imageContainerRef.current) {
@@ -112,12 +139,18 @@ const CityTemplate = () => {
         >
           <h1>Prev</h1>
         </div>
-        <div className="h-[65vh] w-full flex items-center justify-center relative overflow-hidden" ref={imageContainerRef}>
-          <img 
-            src={images[currentIndex]} 
-            alt="" 
-            className={`h-full w-auto object-contain transition-transform duration-500 ${isAnimating ? 'animate-slide-in-right' : ''}`} 
-          />
+        <div className="relative h-[65vh] w-full flex items-center justify-center" ref={imageContainerRef}>
+            <img
+                src={images[currentIndex]}
+                alt=""
+                className={`h-full w-auto object-contain rounded-2xl transition-opacity duration-500 
+                            ${fadeOut ? 'opacity-0' : 'opacity-100'} 
+                            ${fadeIn ? 'opacity-100' : 'opacity-0'}`}
+            />
+
+
+
+
           {isFullscreen && (
             <>
               <button
@@ -162,7 +195,7 @@ const CityTemplate = () => {
               ref={el => thumbnailsRef.current[index] = el}
               src={image}
               alt={`thumbnail-${index}`}
-              className={`h-full w-auto object-contain cursor-pointer hover:border-4 hover:border-blue-500 ${currentIndex === index ? 'border-4 border-blue-500' : ''}`}
+              className={`h-full w-auto object-contain cursor-pointer border-4 ${currentIndex === index ? 'border-blue-500' : 'border-transparent'} hover:border-blue-500 transform transition-transform duration-300 hover:scale-95`}
               onClick={() => {
                 setCurrentIndex(index);
                 thumbnailsRef.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
