@@ -26,6 +26,9 @@ const CityTemplate = () => {
   const imageContainerRef = useRef(null);
   const thumbnailsRef = useRef([]);
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //Image fade in and out
   const [fadeOut, setFateOut] = useState(false);
   const [fadeIn, setFateIn] = useState(false);
 
@@ -36,7 +39,7 @@ const CityTemplate = () => {
       const fadeOutTime = setTimeout(() => {
         setFateOut(false);
         resolve();
-      }, 500); // Updated to 500ms
+      }, 500); 
   
       return () => {
         clearTimeout(fadeOutTime);
@@ -48,7 +51,7 @@ const CityTemplate = () => {
     setFateIn(true);
     const fadeTime = setTimeout(() => {
       setFateIn(false);
-    }, 500); // Updated to 500ms
+    }, 500); 
   
     return () => {
       clearTimeout(fadeTime);
@@ -57,28 +60,19 @@ const CityTemplate = () => {
   
   
 
-  const handlePreviousImage = async () => {
+  const handleChangeImage = async (direction) => {
     await handleFateOut();
   
     setCurrentIndex((prevIndex) => {
-      const newIndex = (prevIndex - 1 + images.length) % images.length;
-      thumbnailsRef.current[newIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
-      return newIndex;
-    });
-  };
-
-  const handleNextImage = async () => {
-    await handleFateOut();
-  
-    setCurrentIndex((prevIndex) => {
-      const newIndex = (prevIndex + 1 + images.length) % images.length;
-      thumbnailsRef.current[newIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      const newIndex = (prevIndex + direction + images.length) % images.length;
       return newIndex;
     });
   };
   
+  
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+  // Full screen
   const handleFullscreen = () => {
     if (imageContainerRef.current) {
       if (imageContainerRef.current.requestFullscreen) {
@@ -123,6 +117,8 @@ const CityTemplate = () => {
     };
   }, []);
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="min-h-screen flex flex-col">
 
@@ -135,7 +131,7 @@ const CityTemplate = () => {
       <div className="flex flex-row flex-grow">
         <div 
           className="w-[5%] h-[65vh] bg-red-400 flex items-center justify-center cursor-pointer"
-          onClick={handlePreviousImage}
+          onClick={() => handleChangeImage(-1)}
         >
           <h1>Prev</h1>
         </div>
@@ -154,13 +150,13 @@ const CityTemplate = () => {
           {isFullscreen && (
             <>
               <button
-                onClick={handlePreviousImage}
+                onClick={() => handleChangeImage(-1)}
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded"
               >
                 Prev
               </button>
               <button
-                onClick={handleNextImage}
+                onClick={() => handleChangeImage(1)}
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded"
               >
                 Next
@@ -176,7 +172,7 @@ const CityTemplate = () => {
         </div>
         <div 
           className="w-[5%] h-[65vh] bg-blue-400 flex items-center justify-center cursor-pointer"
-          onClick={handleNextImage}
+          onClick={() => handleChangeImage(1)}
         >
           <h1>Next</h1>
         </div>
@@ -196,7 +192,8 @@ const CityTemplate = () => {
               src={image}
               alt={`thumbnail-${index}`}
               className={`h-full w-auto object-contain cursor-pointer border-4 ${currentIndex === index ? 'border-blue-500' : 'border-transparent'} hover:border-blue-500 transform transition-transform duration-300 hover:scale-95`}
-              onClick={() => {
+              onClick={async() => {
+                await handleFateOut();
                 setCurrentIndex(index);
                 thumbnailsRef.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
               }}
