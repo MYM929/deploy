@@ -16,7 +16,6 @@ import s14 from "../../assets/TestImage/IMG_20230602_125729.jpg";
 import s15 from "../../assets/TestImage/IMG_20230602_130008.jpg";
 import s16 from "../../assets/TestImage/IMG_20230602_130219.jpg";
 
-
 const CityTemplate = () => {
   const images = [
     s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16
@@ -26,53 +25,45 @@ const CityTemplate = () => {
   const imageContainerRef = useRef(null);
   const thumbnailsRef = useRef([]);
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Image fade in and out
+  const [fadeOut, setFadeOut] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
 
-  //Image fade in and out
-  const [fadeOut, setFateOut] = useState(false);
-  const [fadeIn, setFateIn] = useState(false);
-
-
-  const handleFateOut = () => {
+  const handleFadeOut = () => {
     return new Promise((resolve) => {
-      setFateOut(true);
+      setFadeOut(true);
       const fadeOutTime = setTimeout(() => {
-        setFateOut(false);
+        setFadeOut(false);
         resolve();
       }, 500); 
-  
+
       return () => {
         clearTimeout(fadeOutTime);
       };
     });
   };
-  
+
   useEffect(() => {
-    setFateIn(true);
+    setFadeIn(true);
     const fadeTime = setTimeout(() => {
-      setFateIn(false);
+      setFadeIn(false);
     }, 500); 
-  
+
     return () => {
       clearTimeout(fadeTime);
     };
   }, [currentIndex]);
-  
-  
 
   const handleChangeImage = async (direction) => {
-    await handleFateOut();
-  
+    await handleFadeOut();
+
     setCurrentIndex((prevIndex) => {
       const newIndex = (prevIndex + direction + images.length) % images.length;
       return newIndex;
     });
   };
-  
-  
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // Full screen
+  // Fullscreen
   const handleFullscreen = () => {
     if (imageContainerRef.current) {
       if (imageContainerRef.current.requestFullscreen) {
@@ -117,8 +108,6 @@ const CityTemplate = () => {
     };
   }, []);
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-
   return (
     <div className="min-h-screen flex flex-col" style={{ height: '100dvh' }}>
 
@@ -143,9 +132,6 @@ const CityTemplate = () => {
                             ${fadeOut ? 'opacity-0' : 'opacity-100'} 
                             ${fadeIn ? 'opacity-100' : 'opacity-0'}`}
             />
-
-
-
 
           {isFullscreen && (
             <>
@@ -193,7 +179,7 @@ const CityTemplate = () => {
               alt={`thumbnail-${index}`}
               className={`h-full w-auto object-contain cursor-pointer border-4 ${currentIndex === index ? 'border-blue-500' : 'border-transparent'} hover:border-blue-500 transform transition-transform duration-300 hover:scale-95`}
               onClick={async() => {
-                await handleFateOut();
+                await handleFadeOut();
                 setCurrentIndex(index);
                 thumbnailsRef.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
               }}
