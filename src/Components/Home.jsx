@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import MapImage from '../assets/MapImage/Screenshot 2024-07-25 223609.png';
+import MapImage from '../assets/MapImage/Screenshot 2024-08-01 004601.png';
+
+import DallasNBA from '../assets/CityImageNBA/dallas.png';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -88,20 +90,25 @@ const Home = () => {
               onLoad={handleImageLoad} 
               className="w-auto h-auto object-contain" 
             />
-            <button 
-              onClick={() => navigate('/deploy/city/cityTemplate')} 
-              className="absolute bg-red-500 text-white flex items-center justify-center"
-              style={{ 
-                top: '70%', 
-                left: '40%', 
-                width: `${buttonSize}px`,  // Conditional width
-                height: `${buttonSize}px`, // Conditional height
-                borderRadius: '50%', // Make the button round
-                textAlign: 'center' // Center text horizontally
-              }}
-            >
-              Dallas
-            </button>
+          <button 
+            onClick={() => navigate('/deploy/city/cityTemplate')} 
+            className="absolute text-transparent text-white flex flex-col items-center justify-center
+                      hover: transform transition-transform duration-300 hover:scale-150"
+            style={{ 
+              top: '70%', 
+              left: '40%', 
+              width: `${buttonSize}px`,  // Conditional width
+              height: `${buttonSize}px`, // Conditional height
+              // borderRadius: '50%', // Make the button round
+              textAlign: 'center' // Center text horizontally
+            }}
+          >
+            <img src={DallasNBA} alt="" className="" />
+            <span className="text-purple-700 font-bold text-sm" style={{ marginTop: '-5px' }}>Dallas</span>
+          </button>
+
+
+
           </div>
         </div>
       </div>
