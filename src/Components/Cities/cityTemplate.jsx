@@ -109,15 +109,15 @@ const CityTemplate = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ height: '100dvh' }}>
+    <div className="min-h-screen flex flex-col" style={{ height: '100dvh', overflow: 'hidden' }}>
 
       {/* Heading */}
-      <div className="flex items-center justify-center h-[10svh] bg-blue-300">
+      <div className="flex-none h-[10svh] bg-blue-300 flex items-center justify-center">
         <h1 className="text-4xl font-bold">Welcome to Dallas</h1>
       </div>
 
       {/* Middle */}
-      <div className="flex flex-row flex-grow h-[65svh]">
+      <div className="flex-grow flex">
         <div 
           className="w-[5%] bg-red-400 flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(-1)}
@@ -128,7 +128,7 @@ const CityTemplate = () => {
             <img
                 src={images[currentIndex]}
                 alt=""
-                className={`h-full w-auto object-contain rounded-2xl transition-opacity duration-500 
+                className={`max-h-[65svh] max-w-full object-contain rounded-2xl transition-opacity duration-500  
                             ${fadeOut ? 'opacity-0' : 'opacity-100'} 
                             ${fadeIn ? 'opacity-100' : 'opacity-0'}`}
             />
@@ -165,12 +165,12 @@ const CityTemplate = () => {
       </div>
 
       {/* Bottom */}
-      <div className="flex flex-col h-[25svh]">
+      <div className="flex-none h-[25svh] flex flex-col">
         <div className="h-[5svh] bg-green-400 flex items-center justify-between px-4">
           <h1>hello1</h1>
           <button onClick={handleFullscreen} className="bg-gray-800 text-white px-2 py-1 rounded">Fullscreen</button>
         </div>
-        <div className="h-[20svh] bg-pink-400 flex items-center overflow-x-auto space-x-2 px-2">
+        <div className="flex-grow bg-pink-400 flex items-center overflow-x-auto space-x-2 px-2">
           {images.map((image, index) => (
             <img
               key={index}
