@@ -9,6 +9,7 @@ const Home = () => {
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isHoverEnabled, setIsHoverEnabled] = useState(true);
   const imageRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -57,14 +58,17 @@ const Home = () => {
   const handleButtonAnimation = () => {
     return new Promise((resolve) => {
       setIsAnimating(true);
+      setIsHoverEnabled(false); 
       setTimeout(() => {
         setIsAnimating(false);
         setTimeout(() => {
+          setIsHoverEnabled(true);
           resolve();
-        }, 130); 
-      }, 130); 
+        }, 130);
+      }, 130);
     });
   };
+
 
   const handleClick = async () => {
     await handleButtonAnimation();
@@ -111,8 +115,9 @@ const Home = () => {
           <button 
             onClick={() => handleClick()} 
             className={`absolute text-transparent text-white flex flex-col items-center justify-center
-                        transform transition-transform hover:scale-150
-                       ${isAnimating ? 'scale-150' : 'scale-100'}`}
+                        transform transition-transform
+                        ${isHoverEnabled ? 'hover:scale-150' : ''}
+                        ${isAnimating ? 'scale-150' : 'scale-100'}`}
             style={{ 
               top: '70%', 
               left: '40%', 
