@@ -111,7 +111,7 @@ const Home = () => {
           <button 
             onClick={() => handleClick()} 
             className={`absolute text-transparent text-white flex flex-col items-center justify-center
-                        transform transition-transform hover: duration-300 hover:scale-150
+                        transform transition-transform hover:scale-150
                        ${isAnimating ? 'scale-150' : 'scale-100'}`}
             style={{ 
               top: '70%', 
