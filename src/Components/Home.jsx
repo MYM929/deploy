@@ -8,6 +8,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
+  const [isAnimating, setIsAnimating] = useState(false);
   const imageRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -53,6 +54,16 @@ const Home = () => {
     updateDimensions();
   };
 
+  const handleClick = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsAnimating(false);
+      setTimeout(() => {
+        navigate('/deploy/city/cityTemplate');
+      }, 500); // Navigate after an additional 500ms
+    }, 500); // Set isAnimating to false after 500ms
+  };
+
   // Calculate button size based on the conditions
   const buttonSize = containerDimensions.width > imageDimensions.width * 0.3
     ? 50 // Fixed size
@@ -91,9 +102,11 @@ const Home = () => {
               className="w-auto h-auto object-contain" 
             />
           <button 
-            onClick={() => navigate('/deploy/city/cityTemplate')} 
-            className="absolute text-transparent text-white flex flex-col items-center justify-center
-                      hover: transform transition-transform duration-300 hover:scale-150"
+            onClick={() => handleClick()} 
+            className={`absolute text-transparent text-white flex flex-col items-center justify-center
+                       hover: transform transition-transform duration-300 hover:scale-150
+                       ${isAnimating ? 'transform scale-150' : 'transform scale-100'}`}
+                       
             style={{ 
               top: '70%', 
               left: '40%', 
@@ -117,3 +130,5 @@ const Home = () => {
 };
 
 export default Home;
+
+
