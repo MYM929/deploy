@@ -134,7 +134,7 @@ const CityTemplate = () => {
           className="w-[10%] flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(-1)}
         >
-          <MdNavigateBefore className="text-[20rem] text-gray-800" />
+          <MdNavigateBefore className="text-[20rem] text-gray-600" />
         </div>
         <div className="relative w-full flex items-center justify-center" ref={imageContainerRef}>
             <img
@@ -180,7 +180,7 @@ const CityTemplate = () => {
           className="w-[10%] flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(1)}
         >
-          <MdNavigateNext className="text-[20rem] text-gray-800" />
+          <MdNavigateNext className="text-[20rem] text-gray-600" />
         </div>
       </div>
 
@@ -191,7 +191,7 @@ const CityTemplate = () => {
             Fullscreen
           </button>
         </div>
-        <div className="flex-grow flex items-center overflow-x-auto space-x-2 px-2">
+        <div className="flex-grow bg-gray-400 flex items-center overflow-x-auto space-x-2 px-2">
           {images.map((image, index) => (
             <img
               key={index}
