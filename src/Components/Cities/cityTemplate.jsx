@@ -128,10 +128,17 @@ const CityTemplate = () => {
           <MdNavigateBefore className='text-[20rem]'/>
         </div>
         <div className="relative w-full flex items-center justify-center" ref={imageContainerRef}>
+            <div className="absolute w-full h-full flex items-center justify-center overflow-hidden">
+              <img
+                src={images[currentIndex]}
+                alt=""
+                className="absolute w-full h-full object-cover filter blur-lg scale-105"
+              />
+            </div>
             <img
                 src={images[currentIndex]}
                 alt=""
-                className={`max-h-[65svh] max-w-full object-contain rounded-2xl transition-opacity duration-500  
+                className={`relative max-h-[65svh] max-w-full object-contain rounded-2xl transition-opacity duration-500  
                             ${fadeOut ? 'opacity-0' : 'opacity-100'} 
                             ${fadeIn ? 'opacity-100' : 'opacity-0'}`}
             />
