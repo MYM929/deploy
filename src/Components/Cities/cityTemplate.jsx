@@ -143,28 +143,29 @@ const CityTemplate = () => {
                             ${fadeIn ? 'opacity-100' : 'opacity-0'}`}
             />
 
-          {isFullscreen && (
-            <>
-              <button
-                onClick={() => handleChangeImage(-1)}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded"
-              >
-                Prev
-              </button>
-              <button
-                onClick={() => handleChangeImage(1)}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded"
-              >
-                Next
-              </button>
-              <button
-                onClick={handleExitFullscreen}
-                className="absolute bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded"
-              >
-                Exit Fullscreen
-              </button>
-            </>
-          )}
+            {isFullscreen && (
+              <>
+                <button
+                  onClick={() => handleChangeImage(-1)}
+                  className="absolute left-4 bottom-10 bg-gray-800 text-white px-4 py-2 rounded"
+                >
+                  <MdNavigateBefore className='text-[2rem]'/>
+                </button>
+                <button
+                  onClick={() => handleChangeImage(1)}
+                  className="absolute right-4 bottom-10 bg-gray-800 text-white px-4 py-2 rounded"
+                >
+                  <MdNavigateNext className='text-[2rem]'/>
+                </button>
+                <button
+                  onClick={handleExitFullscreen}
+                  className="absolute top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded"
+                >
+                  Exit
+                </button>
+              </>
+            )}
+
         </div>
         <div 
           className="w-[10%] bg-blue-400 flex items-center justify-center cursor-pointer"
