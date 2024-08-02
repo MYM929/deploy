@@ -125,7 +125,7 @@ const CityTemplate = () => {
 
       {/* Heading */}
       <div className="flex-none h-[10svh] flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-blue-300">Dallas</h1>
+        <h1 className="text-4xl font-bold text-blue-900">Dallas</h1>
       </div>
 
       {/* Middle */}
@@ -134,7 +134,7 @@ const CityTemplate = () => {
           className="w-[10%] flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(-1)}
         >
-          <MdNavigateBefore className="text-[20rem] text-gray-600" />
+          <MdNavigateBefore className="text-[20rem] text-gray-500" />
         </div>
         <div className="relative w-full flex items-center justify-center" ref={imageContainerRef}>
             <img
@@ -180,7 +180,7 @@ const CityTemplate = () => {
           className="w-[10%] flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(1)}
         >
-          <MdNavigateNext className="text-[20rem] text-gray-600" />
+          <MdNavigateNext className="text-[20rem] text-gray-500" />
         </div>
       </div>
 
