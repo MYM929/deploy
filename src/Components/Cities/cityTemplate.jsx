@@ -16,6 +16,9 @@ import s14 from "../../assets/TestImage/IMG_20230602_125729.jpg";
 import s15 from "../../assets/TestImage/IMG_20230602_130008.jpg";
 import s16 from "../../assets/TestImage/IMG_20230602_130219.jpg";
 
+import { MdNavigateBefore } from "react-icons/md";
+import { MdNavigateNext } from "react-icons/md";
+
 const CityTemplate = () => {
   const images = [
     s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16
@@ -119,10 +122,10 @@ const CityTemplate = () => {
       {/* Middle */}
       <div className="flex-grow flex">
         <div 
-          className="w-[5%] bg-red-400 flex items-center justify-center cursor-pointer"
+          className="w-[10%] bg-red-400 flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(-1)}
         >
-          <h1>Prev</h1>
+          <MdNavigateBefore className='text-[20rem]'/>
         </div>
         <div className="relative w-full flex items-center justify-center" ref={imageContainerRef}>
             <img
@@ -157,10 +160,10 @@ const CityTemplate = () => {
           )}
         </div>
         <div 
-          className="w-[5%] bg-blue-400 flex items-center justify-center cursor-pointer"
+          className="w-[10%] bg-blue-400 flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(1)}
         >
-          <h1>Next</h1>
+          <MdNavigateNext className='text-[20rem]'/>
         </div>
       </div>
 
