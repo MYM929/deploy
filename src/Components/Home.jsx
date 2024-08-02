@@ -112,7 +112,7 @@ const Home = () => {
             onClick={() => handleClick()} 
             className={`absolute text-transparent text-white flex flex-col items-center justify-center
                         transform transition-transform 
-                       ${isAnimating ? 'duration-100 scale-150' : 'duration-100 scale-100'}`}
+                       ${isAnimating ? 'scale-150' : 'scale-100'}`}
 
                       //  hover: duration-300 hover:scale-150
                        
