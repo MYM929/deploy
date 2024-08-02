@@ -114,27 +114,29 @@ const CityTemplate = () => {
   return (
     <div className="min-h-screen flex flex-col" style={{ height: '100dvh', overflow: 'hidden' }}>
 
+      {/* Blurred Background */}  
+      <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden -z-10">
+        <img
+          src={images[currentIndex]}
+          alt="background"
+          className="w-full h-full object-cover filter blur-lg scale-105"
+        />
+      </div>
+
       {/* Heading */}
-      <div className="flex-none h-[10svh] bg-blue-300 flex items-center justify-center">
-        <h1 className="text-4xl font-bold">Welcome to Dallas</h1>
+      <div className="flex-none h-[10svh] flex items-center justify-center">
+        <h1 className="text-4xl font-bold text-blue-300">Dallas</h1>
       </div>
 
       {/* Middle */}
       <div className="flex-grow flex">
         <div 
-          className="w-[10%] bg-red-400 flex items-center justify-center cursor-pointer"
+          className="w-[10%] flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(-1)}
         >
-          <MdNavigateBefore className='text-[20rem]'/>
+          <MdNavigateBefore className="text-[20rem] text-gray-800" />
         </div>
         <div className="relative w-full flex items-center justify-center" ref={imageContainerRef}>
-            <div className="absolute w-full h-full flex items-center justify-center overflow-hidden">
-              <img
-                src={images[currentIndex]}
-                alt=""
-                className="absolute w-full h-full object-cover filter blur-lg scale-105"
-              />
-            </div>
             <img
                 src={images[currentIndex]}
                 alt=""
@@ -145,6 +147,13 @@ const CityTemplate = () => {
 
             {isFullscreen && (
               <>
+                <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden -z-10">
+                  <img
+                    src={images[currentIndex]}
+                    alt="background"
+                    className="w-full h-full object-cover filter blur-lg scale-105"
+                  />
+                </div>
                 <button
                   onClick={() => handleChangeImage(-1)}
                   className="absolute left-4 bottom-10 bg-gray-800 text-white px-4 py-2 rounded"
@@ -168,20 +177,21 @@ const CityTemplate = () => {
 
         </div>
         <div 
-          className="w-[10%] bg-blue-400 flex items-center justify-center cursor-pointer"
+          className="w-[10%] flex items-center justify-center cursor-pointer"
           onClick={() => handleChangeImage(1)}
         >
-          <MdNavigateNext className='text-[20rem]'/>
+          <MdNavigateNext className="text-[20rem] text-gray-800" />
         </div>
       </div>
 
       {/* Bottom */}
       <div className="flex-none h-[25svh] flex flex-col">
-        <div className="h-[5svh] bg-green-400 flex items-center justify-between px-4">
-          <h1>hello1</h1>
-          <button onClick={handleFullscreen} className="bg-gray-800 text-white px-2 py-1 rounded">Fullscreen</button>
+        <div className="h-[5svh] flex items-center justify-between px-2">
+          <button onClick={handleFullscreen} className="ml-auto bg-gray-800 text-white px-2 py-1 rounded">
+            Fullscreen
+          </button>
         </div>
-        <div className="flex-grow bg-pink-400 flex items-center overflow-x-auto space-x-2 px-2">
+        <div className="flex-grow flex items-center overflow-x-auto space-x-2 px-2">
           {images.map((image, index) => (
             <img
               key={index}
