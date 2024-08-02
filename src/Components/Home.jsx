@@ -57,22 +57,18 @@ const Home = () => {
   const handleButtonAnimation = () => {
     return new Promise((resolve) => {
       setIsAnimating(true);
-      const animationTime = setTimeout(() => {
+      setTimeout(() => {
         setIsAnimating(false);
-        resolve();
-      }, 500); 
-
-      return () => {
-        clearTimeout(animationTime);
-      };
+        setTimeout(() => {
+          resolve();
+        }, 130); 
+      }, 130); 
     });
   };
 
   const handleClick = async () => {
     await handleButtonAnimation();
-    setTimeout(() => {
-        navigate('/deploy/city/cityTemplate');
-    }, 500);
+    navigate('/deploy/city/cityTemplate');
   };
 
   // Calculate button size based on the conditions
@@ -115,8 +111,8 @@ const Home = () => {
           <button 
             onClick={() => handleClick()} 
             className={`absolute text-transparent text-white flex flex-col items-center justify-center
-                       hover: transform transition-transform duration-300 hover:scale-150
-                       ${isAnimating ? 'transform scale-150' : 'transform scale-100'}`}
+                        transform transition-transform hover: duration-300 hover:scale-150
+                       ${isAnimating ? 'duration-100 scale-150' : 'duration-100 scale-100'}`}
                        
             style={{ 
               top: '70%', 
