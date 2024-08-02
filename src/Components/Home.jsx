@@ -54,14 +54,25 @@ const Home = () => {
     updateDimensions();
   };
 
-  const handleClick = () => {
-    setIsAnimating(true);
+  const handleButtonAnimation = () => {
+    return new Promise((resolve) => {
+      setIsAnimating(true);
+      const animationTime = setTimeout(() => {
+        setIsAnimating(false);
+        resolve();
+      }, 500); 
+
+      return () => {
+        clearTimeout(animationTime);
+      };
+    });
+  };
+
+  const handleClick = async () => {
+    await handleButtonAnimation();
     setTimeout(() => {
-      setIsAnimating(false);
-      setTimeout(() => {
         navigate('/deploy/city/cityTemplate');
-      }, 500); // Navigate after an additional 500ms
-    }, 500); // Set isAnimating to false after 500ms
+    }, 500);
   };
 
   // Calculate button size based on the conditions
