@@ -2,14 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import MapImage from '../assets/MapImage/Screenshot 2024-08-01 004601.png';
 
-import DallasNBA from '../assets/CityImageNBA/dallas.png';
+import { CityData } from '../../src/cityData'; 
 
 const Home = () => {
   const navigate = useNavigate();
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [isHoverEnabled, setIsHoverEnabled] = useState(true);
   const imageRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -55,6 +53,61 @@ const Home = () => {
     updateDimensions();
   };
 
+  // Calculate button size based on the conditions
+  const buttonSize = containerDimensions.width > imageDimensions.width * 0.3
+    ? 50 // Fixed size
+    : containerDimensions.width * 50/(2812*0.3); 
+
+  return (
+    <div className="h-screen flex flex-col">
+      <div className="h-1/5 flex items-center justify-center bg-gray-500">
+        <h1 className="text-4xl font-bold text-center">
+          Hi, my name is Yongming <br />
+          <span className="mt-4 block">Welcome to My Space</span>
+        </h1>
+      </div>
+
+      {/* Screen container */}
+      <div className="h-1/2 relative flex justify-center bg-gray-200" ref={containerRef}>
+        {/* Image container */}
+        <div style={{ width: imageDimensions.width * 0.5, height: imageDimensions.height * 0.5 }}>
+          <div className="relative">
+            <img 
+              src={MapImage} 
+              alt="Map" 
+              ref={imageRef} 
+              onLoad={handleImageLoad} 
+              className="w-auto h-auto object-contain" 
+              style={{ opacity: 0.8 }}
+            />
+
+
+            <CityIconButton cityName={CityData.Dallas.cityName} cityIcon={CityData.Dallas.cityIcon} top='70%' left='40%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.OklahomaCity.cityName} cityIcon={CityData.OklahomaCity.cityIcon} top='50%' left='40%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.Houston.cityName} cityIcon={CityData.Houston.cityIcon} top='70%' left='53%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.NewYork.cityName} cityIcon={CityData.NewYork.cityIcon} top='10%' left='93%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.Boston.cityName} cityIcon={CityData.Boston.cityIcon} top='20%' left='80%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.SanFrancisco.cityName} cityIcon={CityData.SanFrancisco.cityIcon} top='30%' left='10%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.LosAngeles.cityName} cityIcon={CityData.LosAngeles.cityIcon} top='70%' left='15%' buttonSize={buttonSize} navigate={navigate}/>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+const CityIconButton = ({ cityName, cityIcon, top, left, buttonSize, navigate}) => {
+
+
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isHoverEnabled, setIsHoverEnabled] = useState(true);
+
   const handleButtonAnimation = () => {
     return new Promise((resolve) => {
       setIsAnimating(true);
@@ -72,74 +125,28 @@ const Home = () => {
 
   const handleClick = async () => {
     await handleButtonAnimation();
-    navigate('/deploy/city/cityTemplate');
+    const cityNameWithoutSpaces = cityName.replace(/\s+/g, '').toLowerCase();
+    navigate(`/deploy/city/${cityNameWithoutSpaces}`);
   };
 
-  // Calculate button size based on the conditions
-  const buttonSize = containerDimensions.width > imageDimensions.width * 0.3
-    ? 50 // Fixed size
-    : containerDimensions.width * 50/(2812*0.3); 
 
   return (
-    <div className="h-screen flex flex-col">
-      <div className="h-1/3 flex items-center justify-center bg-gray-100">
-        <h1 className="text-4xl font-bold text-center">
-          Hi, my name is Yongming <br />
-          <span className="mt-4 block">Welcome to My Space</span>
-        </h1>
-      </div>
-
-      <div className="h-1/10 flex flex-col items-center justify-center bg-white">
-        <div className="flex space-x-4">
-          <button onClick={() => navigate('/deploy/city/dallas')} className="m-2 p-2 bg-blue-500 text-white rounded">
-            To Dallas
-          </button>
-          <button onClick={() => navigate('/deploy/city/boston')} className="m-2 p-2 bg-blue-500 text-white rounded">
-            To Boston
-          </button>
-        </div>
-      </div>
-
-      {/* Screen container */}
-      <div className="h-1/2 relative flex justify-center bg-gray-200" ref={containerRef}>
-        {/* Image container */}
-        <div style={{ width: imageDimensions.width * 0.3, height: imageDimensions.height * 0.3 }}>
-          <div className="relative">
-            <img 
-              src={MapImage} 
-              alt="Map" 
-              ref={imageRef} 
-              onLoad={handleImageLoad} 
-              className="w-auto h-auto object-contain" 
-            />
-          <button 
-            onClick={() => handleClick()} 
-            className={`absolute text-transparent text-white flex flex-col items-center justify-center
-                        transform transition-transform
-                        ${isHoverEnabled ? 'hover:scale-150' : ''}
-                        ${isAnimating ? 'scale-150' : 'scale-100'}`}
-            style={{ 
-              top: '70%', 
-              left: '40%', 
-              width: `${buttonSize}px`,  // Conditional width
-              height: `${buttonSize}px`, // Conditional height
-              // borderRadius: '50%', // Make the button round
-              textAlign: 'center' // Center text horizontally
-            }}
-          >
-            <img src={DallasNBA} alt="" className="" />
-            <span className="text-purple-700 font-bold text-sm" style={{ marginTop: '-5px' }}>Dallas</span>
-          </button>
-
-
-
-          </div>
-        </div>
-      </div>
-    </div>
+    <button
+      onClick={() => handleClick()}
+      className={`absolute text-transparent text-white flex flex-col items-center justify-center
+                  transform transition-transform
+                  ${isHoverEnabled ? 'hover:scale-150' : ''}
+                  ${isAnimating ? 'scale-150' : 'scale-100'}`}
+      style={{
+        top: top,
+        left: left,
+        width: `${buttonSize}px`,
+        height: `${buttonSize}px`,
+        textAlign: 'center',
+      }}
+    >
+      <img src={cityIcon} alt={`${cityName} icon`} className="" />
+      <span className="text-purple-700 font-bold text-sm" style={{ marginTop: '-5px' }}>{cityName}</span>
+    </button>
   );
 };
-
-export default Home;
-
-

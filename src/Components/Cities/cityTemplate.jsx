@@ -1,28 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import s1 from "../../assets/TestImage/IMG_20230602_121815.jpg";
-import s2 from "../../assets/TestImage/IMG_20230527_134707.jpg";
-import s3 from "../../assets/TestImage/IMG_20230602_121437.jpg";
-import s4 from "../../assets/TestImage/IMG_20230602_121701.jpg";
-import s5 from "../../assets/TestImage/IMG_20230602_122209.jpg";
-import s6 from "../../assets/TestImage/IMG_20230602_122405.jpg";
-import s7 from "../../assets/TestImage/IMG_20230602_122528.jpg";
-import s8 from "../../assets/TestImage/IMG_20230602_122709.jpg";
-import s9 from "../../assets/TestImage/IMG_20230602_123054.jpg";
-import s10 from "../../assets/TestImage/IMG_20230602_123147.jpg";
-import s11 from "../../assets/TestImage/IMG_20230602_123246.jpg";
-import s12 from "../../assets/TestImage/IMG_20230602_124827.jpg";
-import s13 from "../../assets/TestImage/IMG_20230602_124915.jpg";
-import s14 from "../../assets/TestImage/IMG_20230602_125729.jpg";
-import s15 from "../../assets/TestImage/IMG_20230602_130008.jpg";
-import s16 from "../../assets/TestImage/IMG_20230602_130219.jpg";
 
 import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
 
-const CityTemplate = () => {
-  const images = [
-    s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16
-  ];
+const CityTemplate = ({cityName, cityImage}) => {
+  const images = cityImage;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const imageContainerRef = useRef(null);
@@ -125,7 +107,7 @@ const CityTemplate = () => {
 
       {/* Heading */}
       <div className="flex-none h-[10svh] flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-blue-900">Dallas</h1>
+        <h1 className="text-4xl font-bold text-blue-900">{cityName}</h1>
       </div>
 
       {/* Middle */}
