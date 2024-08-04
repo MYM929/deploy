@@ -55,20 +55,20 @@ const Home = () => {
 
   // Calculate button size based on the conditions
   const buttonSize = containerDimensions.width > imageDimensions.width * 0.3
-    ? 50 // Fixed size
-    : containerDimensions.width * 50/(2812*0.3); 
+    ? 80 // Fixed size
+    : containerDimensions.width * 80/(2812*0.3); 
 
   return (
     <div className="h-screen flex flex-col">
-      <div className="h-1/5 flex items-center justify-center bg-gray-500">
-        <h1 className="text-4xl font-bold text-center">
+      <div className="h-1/5 flex items-center justify-center bg-blue-300">
+        <h1 className="text-3xl font-bold text-center">
           Hi, my name is Yongming <br />
           <span className="mt-4 block">Welcome to My Space</span>
         </h1>
       </div>
 
       {/* Screen container */}
-      <div className="h-1/2 relative flex justify-center bg-gray-200" ref={containerRef}>
+      <div className="h-1/2 relative flex justify-center" ref={containerRef}>
         {/* Image container */}
         <div style={{ width: imageDimensions.width * 0.5, height: imageDimensions.height * 0.5 }}>
           <div className="relative">
@@ -82,13 +82,13 @@ const Home = () => {
             />
 
 
-            <CityIconButton cityName={CityData.Dallas.cityName} cityIcon={CityData.Dallas.cityIcon} top='70%' left='40%' buttonSize={buttonSize} navigate={navigate}/>
-            <CityIconButton cityName={CityData.OklahomaCity.cityName} cityIcon={CityData.OklahomaCity.cityIcon} top='50%' left='40%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.Dallas.cityName} cityIcon={CityData.Dallas.cityIcon} top='65%' left='39%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.OklahomaCity.cityName} cityIcon={CityData.OklahomaCity.cityIcon} top='40%' left='39%' buttonSize={buttonSize} navigate={navigate}/>
             <CityIconButton cityName={CityData.Houston.cityName} cityIcon={CityData.Houston.cityIcon} top='70%' left='53%' buttonSize={buttonSize} navigate={navigate}/>
-            <CityIconButton cityName={CityData.NewYork.cityName} cityIcon={CityData.NewYork.cityIcon} top='10%' left='93%' buttonSize={buttonSize} navigate={navigate}/>
-            <CityIconButton cityName={CityData.Boston.cityName} cityIcon={CityData.Boston.cityIcon} top='20%' left='80%' buttonSize={buttonSize} navigate={navigate}/>
-            <CityIconButton cityName={CityData.SanFrancisco.cityName} cityIcon={CityData.SanFrancisco.cityIcon} top='30%' left='10%' buttonSize={buttonSize} navigate={navigate}/>
-            <CityIconButton cityName={CityData.LosAngeles.cityName} cityIcon={CityData.LosAngeles.cityIcon} top='70%' left='15%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.NewYork.cityName} cityIcon={CityData.NewYork.cityIcon} top='1%' left='83%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.Boston.cityName} cityIcon={CityData.Boston.cityIcon} top='25%' left='74%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.SanFrancisco.cityName} cityIcon={CityData.SanFrancisco.cityIcon} top='20%' left='7%' buttonSize={buttonSize} navigate={navigate}/>
+            <CityIconButton cityName={CityData.LosAngeles.cityName} cityIcon={CityData.LosAngeles.cityIcon} top='65%' left='13%' buttonSize={buttonSize} navigate={navigate}/>
 
 
 
@@ -146,7 +146,7 @@ const CityIconButton = ({ cityName, cityIcon, top, left, buttonSize, navigate}) 
       }}
     >
       <img src={cityIcon} alt={`${cityName} icon`} className="" />
-      <span className="text-purple-700 font-bold text-sm" style={{ marginTop: '-5px' }}>{cityName}</span>
+      <span className="text-purple-700 font-bold" style={{ fontSize: '12px',  marginTop: '-5px', whiteSpace: 'nowrap'}}>{cityName}</span>
     </button>
   );
 };

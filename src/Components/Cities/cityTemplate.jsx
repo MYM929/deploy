@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const CityTemplate = ({cityName, cityImage}) => {
   const images = cityImage;
@@ -9,6 +10,7 @@ const CityTemplate = ({cityName, cityImage}) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const imageContainerRef = useRef(null);
   const thumbnailsRef = useRef([]);
+  const navigate = useNavigate();
 
   // Image fade in and out
   const [fadeOut, setFadeOut] = useState(false);
@@ -105,9 +107,13 @@ const CityTemplate = ({cityName, cityImage}) => {
         />
       </div>
 
+      <button onClick={() => navigate('/deploy')} className="ml-auto bg-gray-800 text-white px-2 py-1 rounded">
+        Home
+      </button>
+
       {/* Heading */}
       <div className="flex-none h-[10svh] flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-blue-900">{cityName}</h1>
+        <h1 className="text-4xl font-bold text-blue-900 bg-gray-500 bg-opacity-50">{cityName}</h1>
       </div>
 
       {/* Middle */}
