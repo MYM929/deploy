@@ -26,7 +26,7 @@ const App = () => {
         />        
         <Route 
           path="/city/Boston" 
-          element={<CityTemplate cityName={CityData.LosAngeles.cityName} cityImage={CityData.LosAngeles.cityImage} />}
+          element={<CityTemplate cityName={CityData.Boston.cityName} cityImage={CityData.Boston.cityImage} />}
         />
         <Route 
           path="/city/SanFrancisco" 
