@@ -126,7 +126,7 @@ const CityIconButton = ({ cityName, cityIcon, top, left, buttonSize, navigate}) 
   const handleClick = async () => {
     await handleButtonAnimation();
     const cityNameWithoutSpaces = cityName.replace(/\s+/g, '').toLowerCase();
-    navigate(`/deploy/city/${cityNameWithoutSpaces}`);
+    navigate(`/city/${cityNameWithoutSpaces}`);
   };
 
 

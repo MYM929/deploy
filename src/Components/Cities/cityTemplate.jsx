@@ -107,7 +107,7 @@ const CityTemplate = ({cityName, cityImage}) => {
         />
       </div>
 
-      <button onClick={() => navigate('/deploy')} className="ml-auto bg-gray-800 text-white px-2 py-1 rounded">
+      <button onClick={() => navigate('/')} className="ml-auto bg-gray-800 text-white px-2 py-1 rounded">
         Home
       </button>
 
